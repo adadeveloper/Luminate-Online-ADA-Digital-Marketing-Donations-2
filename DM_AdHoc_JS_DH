@@ -1,0 +1,550 @@
+<!-- hidden place autocomplete ori -->
+<table id="address" style="display:none;">
+      <tr>
+        <td class="label">Street address</td>
+        <td class="slimField"><input class="field" id="street_number"
+              disabled="true"></input></td>
+        <td class="wideField" colspan="2"><input class="field" id="route"
+              disabled="true"></input></td>
+      </tr>
+      <tr>
+        <td class="label">City</td>
+        <td class="wideField" colspan="3"><input class="field" id="locality"
+              disabled="true"></input></td>
+      </tr>
+      <tr>
+        <td class="label">State</td>
+        <td class="slimField"><input class="field"
+              id="administrative_area_level_1" disabled="true"></input></td>
+        <td class="label">Zip code</td>
+        <td class="wideField"><input class="field" id="postal_code"
+              disabled="true"></input></td>
+      </tr>
+      <tr>
+        <td class="label">Country</td>
+        <td class="wideField" colspan="3"><input class="field"
+              id="country" disabled="true"></input></td>
+      </tr>
+</table>
+
+
+<script type="text/javascript">
+
+
+var placeSearch, autocomplete,whatFocusAddr;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+var dfpubname;
+
+jQDM(document).ready(function(){
+
+//GDPR
+
+jQDM('label[for=gdpr_consent_dropdown]').hide();
+jQDM('label[for=gdpr_consent_radio]').hide();
+jQDM('#gdpr_consent_radio').hide();
+
+if(jQDM('#billing_addr_country').length){
+checkMYGDPR();
+jQDM('#billing_addr_country').on('change', function(){
+checkMYGDPR();
+});
+}
+
+
+if(jQDM('#yesno_fulfillment_radio').length){
+jQDM('#yesno_fulfillment_radio').prop('checked', true);
+}
+
+if(jQDM('#tribute_type').length){
+//dfpubname = '[[T6:[[S120:dc:donationFormName]]]]';
+//console.log(dfpubname);
+
+if (jQDM('#honor_gift_-_reason_dropdown').length){
+jQDM('#tribute_type option:eq(1)').prop('selected','selected');
+jQDM('#tribute_type').val('tribute_type_value2');
+} else {
+jQDM('#tribute_type option:eq(0)').prop('selected','selected');
+jQDM('#tribute_type').val('tribute_type_value1');
+}
+console.log(jQDM('#tribute_type').val());
+}
+
+	
+//sustainer option
+	if(jQDM('#makeAnnualBtn').length){
+		SustainerOption();
+	}
+
+if(currDMDFID === '19444'){
+if(ie != "8"){
+jQDM('#dmfooter').css('background-color','#342e27');
+jQDM('#dmheader').css('background-color','#f8f8f8');
+jQDM('#dmcontentL').css({
+'max-width':'600px',
+'width':'100%'
+});
+jQDM('div.responsive').css('max-width','600px');
+jQDM('#dmcontentL').prepend('<h1 style="color:#FFF;font-weight:bold;text-shadow: 1px 1px 3px #000000;">Help find cure for Diabetes!</h1>');
+}
+}
+
+if((currDMDFID === '19245')||(currDMDFID === '19442')||(currDMDFID === '19586')){
+	
+jQDM('#dmcontentL').css({
+'float':'none',
+'position':'relative',
+'margin':'0 auto',
+'max-width':'400px',
+'width':'100%'
+});
+
+jQDM('#dmbannerSlogan').css({
+'display':'block',
+'position':'relative',
+'margin':'0 auto',
+'text-align':'center',
+'width':'100%'
+});
+jQDM('#dfheader19245').css({
+'font-size':'35pt'
+});
+jQDM('#dfheader19442').css({
+'font-size':'35pt'
+});
+jQDM('#dmlogo').css({
+'display':'block',
+'position':'relative',
+'margin':'0 auto',
+'text-align':'center'
+});
+}
+
+if(currDMDFID === '19707'){
+	
+//jQDM('#dmheader').css({'background-image' : 'url(../ws/digitalmarketing/img/parchment.jpg)','background-repeat': 'repeat','min-height':'225px'});
+
+if(getURLParameter("showmode")==='2'){
+if(getURLParameter("showvers")==='b'){
+if(getURLParameter("showvid")==='y'){
+jQDM('#dmheader').backstretch('../ws/digitalmarketing/img/candy_bg2000.jpg');
+} else {
+jQDM('#dmheader').backstretch('../ws/digitalmarketing/img/bgcandy223b.jpg');
+}
+} else {
+jQDM('#dmheader').backstretch('../ws/digitalmarketing/img/heartshaped_bg.jpg');
+}
+
+jQDM('#dmactlogo').attr('src','../ws/digitalmarketing/img/ada-logo_white.png');
+jQDM('#dmactlogo').css('width','225px');
+jQDM('#dfheader19707 p').css({'color':'#FFF','text-shadow': '2px 2px #000'});
+jQDM('#dfheader19707 h1').css({'color':'#FFF','font-weight':'bold','font-size':'30pt','text-shadow': '2px 2px #000'});
+jQDM('#dmbannerSlogan').css('padding-top','5px');
+
+} else{
+jQDM('#dmheader').css({'background-image' : 'url(../ws/digitalmarketing/img/parchment.jpg)','background-repeat': 'repeat'});
+jQDM('#dfheader19707 h1').css({'color':'#C41230','font-weight':'bold','font-size':'30pt'});
+}
+
+jQDM('#dmcontentL').css({
+'float':'none',
+'position':'relative',
+'margin':'0 auto',
+'max-width':'600px',
+'width':'100%'
+});
+
+jQDM('#dmbannerSlogan').css({
+'display':'block',
+'position':'relative',
+'margin':'0 auto',
+'text-align':'center',
+'width':'100%'
+});
+
+jQDM('div.responsive').css('max-width','600px');
+
+jQDM('div.donation-level-amount-container, div.donation-level-label-container').css({'font-size':'18pt','padding':'20px 15px','width':'100px','height':'80px'});
+
+setInterval(function(){ 
+jQDM('.donOneTime').last().hide();
+jQDM('.donMonthly').last().hide();
+}, 100);
+
+	
+}
+	
+if(currDMDFID === '20944'){
+	//jQDM('#dmheader').backstretch('../ws/clb/img/SCI_banner_overlay2.jpg');
+//jQDM('#dmheader').backstretch('../ws/clb/img/SCI_Bannerv6trans.png');
+//jQDM('#dmheader').backstretch('../ws/digitalmarketing/img/20944/SCI_Bannerv6c.jpg');
+//jQDM('#dmheader').prepend('<center><h4 style="font-size:16pt;font-weight:bold;color:#FFF;">IMAGINE A FUTURE WITHOUT</h4></center>');
+jQDM('#dmactlogo').attr('src','../ws/digitalmarketing/img/ada_logo_white_transparent.png');
+//jQDM('#dfheader20944').insertAfter('#dmactlogo');
+jQDM('#dfheader20944').hide();
+jQDM('#dmheader').html('<img src="../ws/clb/img/SCI_Bannerv6trans.png" style="width:100%;height:auto;max-width:1600px;margin:10px auto;display:block;clear:both;" /><img src="../ws/digitalmarketing/img/ada_logo_white_transparent.png" style="width:100%;height:auto;max-width:150px;margin:10px auto;display:block;clear:both;" />');
+}
+
+//18844, 19824 were included and now back to 2 col
+if((currDMDFID === '19805')||(currDMDFID === '19806')||(currDMDFID === '19825')||(currDMDFID === '19826')||(currDMDFID === '19827')||(currDMDFID === '19828')||(currDMDFID === '19829')||(currDMDFID === '20045')){
+	
+//jQDM('#dmheader').css({'background-image' : 'url(../ws/digitalmarketing/img/parchment.jpg)','background-repeat': 'repeat'});
+jQDM('#dmheader').backstretch('../ws/digitalmarketing/img/18844/df18844bg.jpg');
+jQDM('#dfheader19707 h1').css({'color':'#C41230','font-weight':'bold','font-size':'30pt'});
+
+
+jQDM('#dmcontentL').css({
+'float':'none',
+
+'position':'relative',
+'margin':'0 auto',
+'max-width':'600px',
+'width':'100%'
+});
+
+jQDM('#dmbannerSlogan').css({
+'display':'block',
+'position':'relative',
+'margin':'0 auto',
+'text-align':'center',
+'width':'100%'
+});
+
+jQDM('div.responsive').css('max-width','600px');
+
+jQDM('div.donation-level-amount-container, div.donation-level-label-container').css({'font-size':'18pt','padding':'20px 15px','width':'100px','height':'80px'});
+
+if(currDMDFID != '20045'){
+jQDM('#dfheaderAmaranthShared').show();
+}
+
+/*setInterval(function(){ 
+jQDM('.donOneTime').last().hide();
+jQDM('.donMonthly').last().hide();
+}, 100);*/
+
+	
+}
+
+//retiring don't remove in case if needed back
+/*
+if((currDMDFID === '19105')||(currDMDFID ==='19804')){
+	if ((ie != 8) && (ie != 9)){
+		var myCustomBanner='<div id="cstmBanner19105" style="position:relative;height:0;padding-bottom:37.19%;width:100%;max-width:1024px;min-width:300px;"><iframe style="position:absolute;top:0;left:0;width:100%; height:100%;" src="https://media.flixel.com/cinemagraph/3h1zoby9p4h5jv0o7e67?hd=true&amp;forceGif=false" frameborder="0" allowfullscreen=""></iframe><div id="dmlogo2" style="position:absolute;bottom:10px;right:30px;background-color: #f8f8f8;padding: 10px 15px;"><a href="http://www.diabetes.org" target="_blank"><img src="../ws/digitalmarketing/img/ada-logo.png" alt="American Diabetes Association" border="0"></a></div></div>';
+		var startWidth2;
+		startWidth2 = jQDM(window).width();
+	
+		if(jQDM(window).width() > 999){
+			jQDM(myCustomBanner).insertBefore(jQDM('#dmlogo'));
+			jQDM('#dmlogo').hide();
+			jQDM('#dfheader19105').hide();
+			jQDM('#dmheader > .centerDiv').css('padding-bottom','0px');
+			jQDM('#dmheader > .centerDiv').css('padding-top','0px');
+		}
+		
+	
+		jQDM(window).resize(function() {	
+			if(jQDM(window).width() != startWidth2){	
+			  if (jQDM(window).width() > 999) {
+				if(jQDM('#cstmBanner19105').length){
+				jQDM('#cstmBanner19105').show();				
+				} else {
+				jQDM(myCustomBanner).insertBefore(jQDM('#dmlogo'));
+				jQDM('#cstmBanner19105').show();				
+				}
+				jQDM('#dmlogo').hide();
+				jQDM('#dfheader19105').hide();
+				jQDM('#dmheader > .centerDiv').css('padding-bottom','0px');
+				jQDM('#dmheader > .centerDiv').css('padding-top','0px');
+				startWidth2 = jQDM(window).width();
+			  } else{
+				jQDM('#cstmBanner19105').hide();
+				jQDM('#dmheader > .centerDiv').css('padding-bottom','20px');
+				jQDM('#dmheader > .centerDiv').css('padding-top','20px');
+				jQDM('#dmlogo').show();
+				jQDM('#dmlogo').css('display','block');
+				jQDM('#dfheader19105').show();
+				startWidth2 = jQDM(window).width();
+			  }
+	
+			}
+		});
+	
+	} 
+}
+*/
+
+if((currDMDFID === '19544')||(currDMDFID === '19545')||(currDMDFID === '20004')||(currDMDFID === '19624')||(currDMDFID === '19625')||(currDMDFID === '19705')||(currDMDFID === '19706') || (currDMDFID ==='19784') || (currDMDFID ==='19884') || (currDMDFID ==='19904')||(currDMDFID === '19946')||(currDMDFID === '20144') ||(currDMDFID === '20324')||(currDMDFID === '20344')||(currDMDFID === '20345')||(currDMDFID === '20384')||(currDMDFID === '20408')||(currDMDFID === '20487')||(currDMDFID === '20524')||(currDMDFID === '20544')||(currDMDFID === '20566')||(currDMDFID === '20568')||(currDMDFID === '20584')||(currDMDFID === '20604')||(currDMDFID === '20605')||(currDMDFID === '20645')||(currDMDFID === '20646')||(currDMDFID === '20724')||(currDMDFID === '19824')||(currDMDFID === '18844')||(currDMDFID === '20944')){
+	if ((ie != 8) && (ie != 9)){
+		var startWidth3;
+		startWidth3 = jQDM(window).width();
+		
+		if(jQDM(window).width() > 999){
+			jQDM('#dmcontentR').insertBefore('#dmcontentL');					
+		}
+		
+		jQDM(window).resize(function() {	
+			if(jQDM(window).width() != startWidth3){	
+			  if (jQDM(window).width() > 999) {
+				jQDM('#dmcontentR').insertBefore('#dmcontentL');
+				startWidth3 = jQDM(window).width();
+			  } else{
+				jQDM('#dmcontentR').insertAfter('#dmcontentL');
+				startWidth3 = jQDM(window).width();
+			  }
+	
+			}
+		});
+		
+	} 
+}
+	
+if(currDMDFID==='19744'){
+	jQDM('.myCampName').text(jQDM('#dfheader19744').text());
+}
+
+
+if((currDMDFID === '19524')||(currDMDFID === '19105')||(currDMDFID ==='19804')){
+	if ((ie != 8) && (ie != 9)){
+		var myCustomBanner3 = '<div id="cstmBanner19524"><img src="../ws/digitalmarketing/img/ADA_tree_banner_static.jpg" style="max-width:1024px;min-width:300px;width:100%;height:auto;" /></div>';
+		var startWidth3;
+		startWidth3 = jQDM(window).width();
+		
+		if(jQDM(window).width() > 999){
+				jQDM(myCustomBanner3).insertBefore(jQDM('#dmlogo'));
+				jQDM('#dmlogo').hide();
+				jQDM('#dfheader19524').hide();
+				jQDM('#dmheader > .centerDiv').css('padding-bottom','0px');
+				jQDM('#dmheader > .centerDiv').css('padding-top','0px');
+		}
+		
+		jQDM(window).resize(function() {	
+			if(jQDM(window).width() != startWidth3){	
+			  if (jQDM(window).width() > 999) {
+				if(jQDM('#cstmBanner19524').length){
+				jQDM('#cstmBanner19524').show();				
+				} else {
+				jQDM(myCustomBanner).insertBefore(jQDM('#dmlogo'));
+				jQDM('#cstmBanner19524').show();				
+				}
+				jQDM('#dmlogo').hide();
+				jQDM('#dfheader19524').hide();
+				jQDM('#dmheader > .centerDiv').css('padding-bottom','0px');
+				jQDM('#dmheader > .centerDiv').css('padding-top','0px');
+				startWidth3 = jQDM(window).width();
+			  } else{
+				jQDM('#cstmBanner19524').hide();
+				jQDM('#dmlogo').show();
+				jQDM('#dmlogo').css('display','block');
+				jQDM('#dfheader19524').show();
+				jQDM('#dmheader > .centerDiv').css('padding-bottom','20px');
+				jQDM('#dmheader > .centerDiv').css('padding-top','20px');
+				startWidth3 = jQDM(window).width();
+			  }	
+			}
+		});
+	}
+}
+
+
+
+});
+
+function initAutocomplete() {
+
+
+jQDM('#billing_addr_street1name').focus(function(){
+whatFocusAddr = 1;
+autocomplete = new google.maps.places.Autocomplete((document.getElementById('billing_addr_street1name')),{types: ['geocode']});
+autocomplete.addListener('place_changed', fillInAddress);
+});
+
+jQDM('#tribute_notify_recip_street1name').focus(function(){
+whatFocusAddr = 2;
+autocomplete = new google.maps.places.Autocomplete((document.getElementById('tribute_notify_recip_street1name')),{types: ['geocode']});
+autocomplete.addListener('place_changed', fillInAddress);	
+});
+
+
+}
+
+function fillInAddress() {      
+	  
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+      
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+			
+			if (whatFocusAddr == 1){
+				//copy over the value to billing field			
+				var gstreetNameVal =  document.getElementById('street_number').value + " " + document.getElementById('route').value;
+				document.getElementById('billing_addr_street1name').value = gstreetNameVal;
+				document.getElementById('billing_addr_cityname').value = document.getElementById('locality').value; 
+				document.getElementById('billing_addr_zipname').value = document.getElementById('postal_code').value;
+				var gStateVal = document.getElementById('administrative_area_level_1').value;
+				var consStateSelector = document.querySelector('select[name="billing_addr_state"] option[value="'+gStateVal+'"]');
+				if(consStateSelector){
+					consStateSelector.selected = true;	
+				}
+				var gCountryVal = document.getElementById('country').value;
+				var consCountrySelector = document.querySelector('select[name="billing_addr_country"] option[value="'+gCountryVal+'"]');
+				if(consCountrySelector){
+					consCountrySelector.selected = true;
+				}
+			} 
+			if (whatFocusAddr == 2){
+				//copy over the value to tribute field			
+				var gstreetNameVal =  document.getElementById('street_number').value + " " + document.getElementById('route').value;
+				document.getElementById('tribute_notify_recip_street1name').value = gstreetNameVal;
+				document.getElementById('tribute_notify_recip_cityname').value = document.getElementById('locality').value; 
+				document.getElementById('tribute_notify_recip_zipname').value = document.getElementById('postal_code').value;
+				var gStateVal = document.getElementById('administrative_area_level_1').value;
+				var consStateSelector = document.querySelector('select[name="tribute_notify_recip_state"] option[value="'+gStateVal+'"]');
+				if(consStateSelector){
+					consStateSelector.selected = true;	
+				}
+				var gCountryVal = document.getElementById('country').value;
+				var consCountrySelector = document.querySelector('select[name="tribute_notify_recip_country"] option[value="'+gCountryVal+'"]');
+				if(consCountrySelector){
+					consCountrySelector.selected = true;
+				}
+			}
+          }
+        }	  
+}
+
+function SustainerOption(){
+	jQDM('#makeAnnualBtnBox').insertBefore('#level_flexiblegift_type_Row');
+jQDM('#level_flexibleduration_row').hide();
+jQDM('#level_flexibletotal_row').hide();
+
+jQDM('#makeAnnualBtn').on('click', function(){
+		if ( jQDM(this).is(':checked') ) {
+        	jQDM('#level_flexibleduration_row').show();
+jQDM('#level_flexibletotal_row').show();
+jQDM('#level_flexiblegift_type1').prop('checked',false);
+		jQDM('#level_flexiblegift_type2').prop('checked',true);
+fire_obs_comp_event('level_flexiblegift_type', 'level_flexiblegift_type2');
+    	} 
+		else {
+			jQDM('#level_flexibleduration_row').hide();
+jQDM('#level_flexibletotal_row').hide();
+jQDM('#level_flexiblegift_type1').prop('checked',true);
+		jQDM('#level_flexiblegift_type2').prop('checked',false);
+fire_obs_comp_event('level_flexiblegift_type', 'level_flexiblegift_type1');
+		}
+	});
+	
+}
+	
+function checkMYGDPR(){
+var myCountry = jQDM('#billing_addr_country').val();
+myCountry = myCountry.toLowerCase();
+
+switch(myCountry){
+	case "austria":
+	case "belgium":
+	case "bulgaria":
+	case "croatia":
+	case "cyprus":
+	case "czech republic":
+	case "denmark":
+	case "estonia":
+	case "finland":
+	case "france":
+	case "germany":
+	case "greece":
+	case "hungary":
+	case "ireland":
+	case "italy":
+	case "latvia":
+	case "lithuania":
+	case "luxembourg":
+	case "malta":
+	case "netherlands":
+	case "poland":
+	case "portugal":
+	case "romania":
+	case "slovakia":
+	case "slovenia":
+	case "spain":
+	case "sweden":
+	case "united kingdom":
+jQDM('#consentGDPRbox').remove();
+		if(jQDM('#pstep_finish').length){
+			jQDM('<div id="consentGDPRbox" class="text-left"><input type="checkbox" name="consentGDPR" id="consentGDPR" value="yes"> As a resident of countries affected by GDPR, we are required to request your consent and acknowledgement that you authorize us to store your data by checking this box.</div>').insertBefore('#pstep_finish');
+			jQDM('#pstep_finish').hide();	
+			jQDM('#donor_email_opt_inname').prop('checked', false);
+			jQDM('#consentGDPR').on('change', function(){
+				if (jQDM('#consentGDPR').is(':checked')){
+					jQDM('#pstep_finish').show();
+					jQDM('#gdpr_consent_radio').prop('checked', true);
+				} else {
+					jQDM('#pstep_finish').hide();
+					jQDM('#gdpr_consent_radio').prop('checked', false);
+				}
+			});
+		}
+		if(jQDM('#pstep_next').length){
+			jQDM('<div id="consentGDPRbox" class="text-left"><input type="checkbox" name="consentGDPR" id="consentGDPR" value="yes"> As a resident of countries affected by GDPR, we are required to request your consent and acknowledgement that you authorize us to store your data by checking this box.</div>').insertBefore('#pstep_next');
+			jQDM('#pstep_next').hide();	
+			jQDM('#donor_email_opt_inname').prop('checked', false);
+			jQDM('#consentGDPR').on('change', function(){
+				if (jQDM('#consentGDPR').is(':checked')){
+					jQDM('#pstep_next').show();
+					jQDM('#gdpr_consent_radio').prop('checked', true);
+				} else {
+					jQDM('#pstep_next').hide();
+					jQDM('#gdpr_consent_radio').prop('checked', false);
+				}
+			});
+		}
+		break;	
+	default:
+		jQDM('#consentGDPR').prop('checked', false);
+		jQDM('#gdpr_consent_radio').prop('checked', false);
+		jQDM('#consentGDPRbox').remove();
+		jQDM('#donor_email_opt_inname').prop('checked', true);
+		
+		if(jQDM('#pstep_finish').length){
+			jQDM('#pstep_finish').show();
+		}
+		
+		if(jQDM('#pstep_next').length){
+			jQDM('#pstep_next').show();
+		}
+}
+	}
+
+</script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyANilZHIyR3ASrNnAKp27XZsu6qljk0MOY&libraries=places&callback=initAutocomplete" sync defer></script>
+
+<style>
+label[for="donor_email_opt_inname"] {
+    font-size: 7pt;
+    color: #777777;
+    font-weight: normal;
+    font-style: italic;
+}
+#responsive_payment_typecc_type_row{display:block}
+#responsive_payment_typecc_type_MasterCard{width:40px;height:25px;margin-left:-8px;}
+
+/*#tribute_type*/ #tribute_type_row{display:none;}
+</style>
+
+
