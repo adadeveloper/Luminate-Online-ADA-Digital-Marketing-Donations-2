@@ -1,0 +1,65 @@
+[[S51:reus_GTM_Tag_DON]]
+
+<div id="dmheader">
+<div class="centerDiv">
+[[S51:DM_Header]]
+</div>
+</div>
+
+<div class="centerDiv">
+
+<div id="dmmobiletopind"></div>
+
+<div style="clear:both;height:10px;">&nbsp;</div>
+
+<div id="dmcontentL">
+[[S63:3]]
+</div>
+<div id="dmcontentR">
+[[S51:DM_Right_Col]]
+</div>
+
+<div style="clear:both;height:10px;">&nbsp;</div>
+
+<div id="dmmobilebottomind"></div>
+<div style="clear:both;height:10px;">&nbsp;</div>
+
+</div>
+
+<div id="dmfooter">
+<div class="centerDiv">
+[[S51:DM_Footer]]
+</div>
+</div>
+
+
+[[?xxyesxx::xx[[S334:newjq]]xx::
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.1/jquery-migrate.min.js"></script>
+<!-- Latest Bootstrap 3.3.7 compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+::
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest Bootstrap 3.3.6 compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+]]
+
+
+<script src="../ws/js/jquery.magnific-popup.min.js"></script>
+<script src="../ws/js/jquery.backstretch.min.js"></script>
+
+
+<!-- ADA Main JS -->
+<script src="../ws/digitalmarketing/js/dgmr5b.min.js"></script>
+[[S51:DM_AdHoc_JS_DH]]
+<script type="text/javascript">
+if(window.console){
+//console.log(jQuery.fn.jquery);
+//console.log($.fn.jquery);
+console.log(jQDM.fn.jquery);
+}
+</script>
+
+
+[[S51:browser_update_script_DH]]
+
