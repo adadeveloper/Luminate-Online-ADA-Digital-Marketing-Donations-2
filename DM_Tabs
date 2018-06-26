@@ -1,0 +1,6 @@
+<div id="tabHeader">
+<div id="tabOneTime" class="askLvlTabs">One Time</div>
+<div id="tabRecurring" class="askLvlTabs">Monthly</div>
+</div>
+
+<div id="tabContent"></div>
