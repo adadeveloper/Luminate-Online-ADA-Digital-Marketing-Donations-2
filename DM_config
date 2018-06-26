@@ -1,0 +1,29 @@
+<div style="display:none;">
+
+<div id="dfconfig18584">
+<span class="enforcemobiletoptop"></span>
+<span class="enforcemobilebottomtop">3</span>
+</div>
+
+<div id="dfbg18685">../images/golf-promo-bg.png</div>
+<div id="dfbg19444">../ws/img/background-image2.jpg</div>
+
+<div id="dfvid18685">
+<!--<span class="dfvidposter">../ws/digitalmarketing/videos/explore-poster.jpg</span>
+<span class="dfvidogv">../ws/digitalmarketing/videos/explore.ogv</span>
+<span class="dfvidmp4">../ws/digitalmarketing/videos/explore.mp4</span>
+<span class="dfvidwebm">../ws/digitalmarketing/videos/explore.webm</span>-->
+<span class="dfvidposter">../ws/digitalmarketing/videos/movieloop.jpg</span>
+<span class="dfvidogv">../ws/digitalmarketing/videos/movieloop.ogv</span>
+<span class="dfvidmp4">../ws/digitalmarketing/videos/movieloop.mp4</span>
+<span class="dfvidwebm">../ws/digitalmarketing/videos/movieloop.webm</span>
+</div>
+<div id="dfconfig18685">
+<span class="premiummonthly">1</span>
+<span class="premiumonetime">0</span>
+</div>
+
+
+<div id="dfbg19245">../ws/digitalmarketing/img/19245/animated_disco2.gif</div>
+
+</div>
