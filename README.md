@@ -13,3 +13,4 @@ Live Examples:
 
 - https://donations.diabetes.org/site/Donation2?df_id=19444&19444.donation=form1
 
+- https://donations.diabetes.org/site/Donation2?df_id=19707&mfc_pref=T&19707.donation=form1&showmode=2&showvid=y
